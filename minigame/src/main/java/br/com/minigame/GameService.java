@@ -17,6 +17,7 @@ public class GameService {
 	int aleatorio = 4;
 	boolean temDificuldade = false;
 	boolean acertou = false;
+	int totalTentativas = 0;
 	Scanner sc = new Scanner(System.in);
 
 	public void carregaApresentacao() {
@@ -43,11 +44,11 @@ public class GameService {
 
 	public void validaEscolha() {
 		dificuldadeSemAcento = semAcento(dificuldadeEscolhida);
-		if (!dificuldadeSemAcento.toUpperCase().equals("F") && !dificuldadeSemAcento.toUpperCase().equals("M")
-				&& !dificuldadeSemAcento.toUpperCase().equals("D")
-				&& !dificuldadeSemAcento.toUpperCase().equals("FACIL")
-				&& !dificuldadeSemAcento.toUpperCase().equals("MEDIO")
-				&& !dificuldadeSemAcento.toUpperCase().equals("DIFICIL")) {
+		if (!dificuldadeSemAcento.equalsIgnoreCase("F") && !dificuldadeSemAcento.equalsIgnoreCase("M")
+				&& !dificuldadeSemAcento.equalsIgnoreCase("D")
+				&& !dificuldadeSemAcento.equalsIgnoreCase("FACIL")
+				&& !dificuldadeSemAcento.equalsIgnoreCase("MEDIO")
+				&& !dificuldadeSemAcento.equalsIgnoreCase("DIFICIL")) {
 			System.out.println(mensagemDificuldade);
 			temDificuldade = false;
 		} else {
@@ -63,13 +64,13 @@ public class GameService {
 	}
 
 	public void processaDificuldade() {
-		if (dificuldadeSemAcento.toUpperCase().equals("FACIL") || dificuldadeSemAcento.toUpperCase().equals("F")) {
+		if (dificuldadeSemAcento.equalsIgnoreCase("FACIL") || dificuldadeSemAcento.equalsIgnoreCase("F")) {
 			dificuldadeFacil();
 		} else {
-			if (dificuldadeSemAcento.toUpperCase().equals("MEDIO") || dificuldadeSemAcento.toUpperCase().equals("M")) {
+			if (dificuldadeSemAcento.equalsIgnoreCase("MEDIO") || dificuldadeSemAcento.equalsIgnoreCase("M")) {
 			} else {
-				if (dificuldadeSemAcento.toUpperCase().equals("DIFICIL")
-						|| dificuldadeSemAcento.toUpperCase().equals("D")) {
+				if (dificuldadeSemAcento.equalsIgnoreCase("DIFICIL")
+						|| dificuldadeSemAcento.equalsIgnoreCase("D")) {
 				}
 			}
 		}
@@ -79,8 +80,10 @@ public class GameService {
 		if (escolhido != aleatorio) {
 			if (escolhido > aleatorio) {
 				System.out.println("Que pena você errou. Tente um número menor!!");
+				totalTentativas += 1;
 			} else {
 				System.out.println("Que pena você errou. Tente um número maior!!");
+				totalTentativas += 1;
 			}
 		} else {
 			acertou = true;
