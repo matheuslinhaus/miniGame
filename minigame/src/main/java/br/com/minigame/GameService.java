@@ -11,8 +11,12 @@ import java.util.regex.Pattern;
 public class GameService {
 	String barras = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
 	String dificuldadeEscolhida = null;
-	String mensagemDificuldade = "Dificuldade escolhida incorreta. Use as opções abaixo: F para Fácil\n M para Médio\n D para Difícil";
+	String mensagemDificuldade = "Dificuldade escolhida incorreta. Use as opções abaixo:\n F para Fácil\n M para Médio\n D para Difícil";
+	String dificuldadeSemAcento;
+	int escolhido = 2;
+	int aleatorio = 4;
 	boolean temDificuldade = false;
+	boolean acertou = false;
 
 	public void carregaApresentacao() {
 		System.out.println(barras);
@@ -39,24 +43,16 @@ public class GameService {
 	}
 
 	public void validaEscolha() {
-		String dificuldadeSemAcento = semAcento(dificuldadeEscolhida);
-		if (dificuldadeSemAcento.length() == 1) {
-			if (!dificuldadeSemAcento.toUpperCase().equals("F") && !dificuldadeSemAcento.toUpperCase().equals("M")
-					&& !dificuldadeSemAcento.toUpperCase().equals("D")) {
-				System.out.println(mensagemDificuldade);
-				temDificuldade = false;
-			} else {
-				temDificuldade = true;
-			}
+		dificuldadeSemAcento = semAcento(dificuldadeEscolhida);
+		if (!dificuldadeSemAcento.toUpperCase().equals("F") && !dificuldadeSemAcento.toUpperCase().equals("M")
+				&& !dificuldadeSemAcento.toUpperCase().equals("D")
+				&& !dificuldadeSemAcento.toUpperCase().equals("FACIL")
+				&& !dificuldadeSemAcento.toUpperCase().equals("MEDIO")
+				&& !dificuldadeSemAcento.toUpperCase().equals("DIFICIL")) {
+			System.out.println(mensagemDificuldade);
+			temDificuldade = false;
 		} else {
-			if (!dificuldadeSemAcento.toUpperCase().equals("FACIL")
-					&& !dificuldadeSemAcento.toUpperCase().equals("MEDIO")
-					&& !dificuldadeSemAcento.toUpperCase().equals("DIFICIL")) {
-				System.out.println(mensagemDificuldade);
-				temDificuldade = false;
-			} else {
-				temDificuldade = true;
-			}
+			temDificuldade = true;
 		}
 	}
 
@@ -67,8 +63,29 @@ public class GameService {
 		return pattern.matcher(nfdNormalizedString).replaceAll("");
 	}
 
-	public void teste() {
-//		System.out.println(dificuldadeEscolhida);
+	public void processaDificuldade() {
+		if (dificuldadeSemAcento.toUpperCase().equals("FACIL") || dificuldadeSemAcento.toUpperCase().equals("F")) {
+			dificuldadeFacil();
+		} else {
+			if (dificuldadeSemAcento.toUpperCase().equals("MEDIO") || dificuldadeSemAcento.toUpperCase().equals("M")) {
+			} else {
+				if (dificuldadeSemAcento.toUpperCase().equals("DIFICIL")
+						|| dificuldadeSemAcento.toUpperCase().equals("D")) {
+				}
+			}
+		}
+	}
+
+	public void dificuldadeFacil() {
+		if (escolhido != aleatorio) {
+			if (escolhido > aleatorio) {
+				System.out.println("Que pena você errou. Tente um número menor!!");
+			} else {
+				System.out.println("Que pena você errou. Tente um número maior!!");
+			}
+		} else {
+			acertou = true;
+		}
 	}
 
 }
