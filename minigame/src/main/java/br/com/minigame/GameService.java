@@ -17,6 +17,7 @@ public class GameService {
 	int aleatorio = 4;
 	boolean temDificuldade = false;
 	boolean acertou = false;
+	Scanner sc = new Scanner(System.in);
 
 	public void carregaApresentacao() {
 		System.out.println(barras);
@@ -33,13 +34,11 @@ public class GameService {
 	}
 
 	public void escolhaDificuldade() {
-		Scanner sc = new Scanner(System.in);
 		while (!temDificuldade) {
 			System.out.print("Digite a dificuldade: ");
 			dificuldadeEscolhida = sc.nextLine();
 			validaEscolha();
 		}
-		sc.close();
 	}
 
 	public void validaEscolha() {
@@ -88,4 +87,11 @@ public class GameService {
 		}
 	}
 
+	public void digitaTentativa() {
+		while (!acertou) {
+			System.out.print("Escolha um número: ");
+			escolhido = sc.nextInt();
+			processaDificuldade();
+		}
+	}
 }

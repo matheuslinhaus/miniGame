@@ -10,7 +10,7 @@ public class App {
 
 		service.carregaApresentacao();
 		service.escolhaDificuldade();
-		service.processaDificuldade();
+		service.digitaTentativa();
 
 	}
 }
